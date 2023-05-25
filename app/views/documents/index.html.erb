@@ -47,9 +47,9 @@
           <%= file_field_tag :file, class: 'hidden', id: 'file' %>
         </div>
       </div>
-      <div class="hr-line"></div>
 
       <% if @raw_response %>
+        <div class="hr-line"></div>
         <div class="response-container">
           <span class='answer-label'>You have uploaded a document of type: </span><span class="answer-box" id='document-type'><%= @document_type %></span>
         </div>
