@@ -1,0 +1,77 @@
+<header>
+  <div class="container-fluid">
+    <%= image_tag "light_logo.png", height: '50px' %>
+  </div>
+</header>
+
+<div class="modal fade" id="answerModal" tabindex="-1" aria-labelledby="answerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="answerModalLabel">Raw Response</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <code class="answer-raw">
+          this is raw response received from DocumentDog AI Model
+        </code>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="video-container" style="background: linear-gradient(rgb(13, 37, 67) 0%, rgb(9, 13, 19) 100%);">
+  <!-- <video autoplay loop class="object-cover bg-video" src="<%= asset_url("world.mp4") %>"></video> -->
+  <!-- <video autoplay loop class="bg-video" src="https://app.presentations.ai/docs/doclist/assets/images/world.mp4"></video> -->
+
+  <video autoplay muted loop id="myVideo" class="bg-video" >
+    <source src="<%= asset_url("world.mp4") %>" type="video/mp4">
+  </video>
+</div>
+
+<div class="main-container">
+  <div class="upload-container">
+    <p class="title">Upload a file to get started!</p>
+    <p class="subtitle">Click on browse button and upload a document/invoice for demo.</p>
+    <div class="btn-container">
+      <div class="browse-button">
+        <%= button_tag 'Browse', class: 'upload-btn', id: 'upload-btn' %>
+        <%= file_field_tag :file, class: 'hidden', id: 'file' %>
+      </div>
+    </div>
+    <div class="hr-line"></div>
+
+    <div class="response-container">
+      <span class='answer-label'>You have uploaded a document of type: </span><span class="answer-box" id='document-type'>Passport</span>
+    </div>
+
+    <div class="response-container">
+      <span class="subtitle"><%= link_to 'Click here', '#', data: { target: '#answerModal', toggel: 'modal' }, id: 'click-here' %> to view raw response.
+    </div>
+  </div>
+</div>
+
+<footer>
+  <button type="button" class="gradient-btn">Upload</button>
+</footer>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#upload-btn").on('click', function(event) {
+      $("#file").trigger('click');
+    });
+
+    $("#click-here").on('click', function(event) {
+      $('#answerModal').modal('show')
+      event.preventDefault();
+    })
+  })
+
+</script>
