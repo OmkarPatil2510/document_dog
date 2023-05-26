@@ -26,6 +26,16 @@
   </div>
 </div>
 
+<div class="modal fade" id="spinnerModal" tabindex="-1" aria-labelledby="spinnerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" style="width: 150px;">
+    <div class="modal-content">
+      <div class="modal-body" style="padding: 50px;">
+        <%= image_tag 'spinner.png', width: '50px', class: 'rotate' %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="video-container" style="background: linear-gradient(rgb(13, 37, 67) 0%, rgb(9, 13, 19) 100%);">
   <!-- <video autoplay loop class="object-cover bg-video" src="<%= asset_url("world.mp4") %>"></video> -->
   <!-- <video autoplay loop class="bg-video" src="https://app.presentations.ai/docs/doclist/assets/images/world.mp4"></video> -->
@@ -35,7 +45,7 @@
   </video>
 </div>
 
-<%= form_tag documents_path, method: :post do %>
+<%= form_tag documents_path, method: :post, id: 'document-form' do %>
 
   <div class="main-container">
     <div class="upload-container">
@@ -61,11 +71,9 @@
   </div>
 
   <footer>
-    <button type="submit" class="gradient-btn">Upload</button>
+    <button type="submit" class="gradient-btn" id="btn-submit">Upload</button>
   </footer>
-
 <% end %>
-
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -75,8 +83,15 @@
     });
 
     $("#click-here").on('click', function(event) {
-      $('#answerModal').modal('show')
+      $('#answerModal').modal('show');
       event.preventDefault();
+    })
+
+    $("#btn-submit").on('click', function(event) {
+      $('#spinnerModal').modal('show');
+      event.preventDefault();
+      // await new Promise(r => setTimeout(r, 2000));
+      setTimeout($('#document-form').submit(), 2000);
     })
   })
 
